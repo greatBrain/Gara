@@ -1,3 +1,3 @@
 pyaudio
 speech_recognition
-Python pyttsx3 ---> Text-to-speech library, works offline
+Python pyttsx3 ---> Text-to-speech library, works offline 
