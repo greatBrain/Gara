@@ -4,28 +4,52 @@ import os
 import re
 import webbrowser as wbb
 
-def create_engine(command):
-    text = str(command)
-    engine = pytt.init()
 
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[0].id)
+'''class Assistant: 
+ass = Assistant()    
+ass.say_text(input("write your command:")) '''        
 
-    engine.say(text)    
-    engine.runAndWait()
+def say_text(self, text):
 
-    
-create_engine(input("write your command:"))
+    # Initialize the recognizer  
+    rec = sr.Recognizer()  
+
+    self.text = str(text)
+    self.engine = pytt.init()
+
+    self.engine.say(text)    
+    self.engine.runAndWait() 
+
+    while(True):
+        # Exception handling to handle 
+        try:
+
+           # use the microphone as source for input.
+           with sr.Microphone() as source2:
+               # wait for a second to let the recognizer 
+               # adjust the energy threshold based on 
+               # the surrounding noise level
+               rec.adjust_for_ambient_noise(source2, duration=0.2)
+
+
+        except expression as identifier:
+            pass
+        
+          
+          
 
 
 
-'''Cahange the voice(optional)
-    change_voice = input("Do you want to change the voice y/n?\n")
 
-    if 'y' in change_voice:
-        voices = engine.getProperty('voices')
-        engine.setProperty('voice', voices[0].id)
 
-        engine.say("i hope you like my new voice") 
-    else:
-        pass'''
+
+
+
+
+
+
+
+
+
+
+
