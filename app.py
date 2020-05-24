@@ -35,32 +35,12 @@ while(True):
           user_text = rec.recognize_google(audio2)
           user_text = user_text.lower()
 
-          print("You said" + user_text)
+          print("You said" + " " + user_text)
 
           say_text(user_text)
-
 
     except sr.RequestError as e:
         print("Could not request results; {0}".format(e))
 
     except sr.UnknownValueError:
-        print("Unknown error has occured!")
-        
-          
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        print("Unknown error has occured!")     
