@@ -13,7 +13,7 @@ def say_text(command):
     #Initialize the engine
     engine = pytt.init()
 
-    engine.say(text)    
+    engine.say(command)    
     engine.runAndWait() 
 
 while(True):
@@ -31,7 +31,7 @@ while(True):
           #listens for the user's input 
           audio2 = rec.listen(source2)
 
-          # Using ggogle to recognize audio
+          # Using google to recognize audio
           user_text = rec.recognize_google(audio2)
           user_text = user_text.lower()
 
