@@ -4,43 +4,38 @@ import os
 import re
 import webbrowser as wbb
 
-
-# Initialize the recognizer  
-rec = sr.Recognizer() 
-
-def say_text(command):    
-
-    #Initialize the engine
-    engine = pytt.init()
-
-    engine.say(command)    
-    engine.runAndWait() 
-
-while(True):
-    # Exception handling to handle 
-    try:
-
-      # use the microphone as source for input.
-      with sr.Microphone() as source2:
-          # wait for a second to let the recognizer 
-          # adjust the energy threshold based on 
-          # the surrounding noise level
-          rec.adjust_for_ambient_noise(source2, duration=0.2)
+class Text_To_Speech:
+  ''' def say_text(command):
+          #Initialize the engine
+          engine = pytt.init()
+          engine.say(command)
+          engine.runAndWait() '''
+      pass
 
 
-          #listens for the user's input 
-          audio2 = rec.listen(source2)
+class Speech_To_Text:
+      pass
 
-          # Using google to recognize audio
-          user_text = rec.recognize_google(audio2)
-          user_text = user_text.lower()
 
-          print("You said" + " " + user_text)
+# Initialize the recognizer
+rec = sr.Recognizer()
 
-          say_text(user_text)
+ENG = "en-US"
+SPAN = "es-ES"
 
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
+with sr.Microphone() as source:
+     print("Speak to me:\n")
 
-    except sr.UnknownValueError:
-        print("Unknown error has occured!")     
+     #adjust the energy threshold based on the surrounding noise level
+     rec.adjust_for_ambient_noise(source, duration=0.2)
+     audio = rec.listen(source)
+
+     try:
+          text = rec.recognize_google(audio, language = ENG)
+          print("You told me: {}".format(text))
+
+
+     except Exception as e:
+         print("Sorry, could not understand you, try it again!\n")
+     except UnknownValueError:
+         print("Error don't known")
