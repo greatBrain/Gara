@@ -4,8 +4,6 @@ import os
 import re
 import webbrowser as wbb
 
-
-
 class Text_To_Speech:
   ''' def say_text(command):
           #Initialize the engine
