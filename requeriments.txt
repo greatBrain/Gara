@@ -1,1 +1,5 @@
-
+pyaudio
+speech_recognition
+Python pyttsx3 ---> Text-to-speech library, works offline
+service jack_control ----> started 
+libportaudio-dev
