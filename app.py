@@ -12,17 +12,17 @@ class Text_To_Speech:
           engine.runAndWait() '''
 
 
-class Speech_To_Text:
+class Speech:
       def __init__(self):
           self.ENG = "en-US"
           self.SPAN = "es-ES"
 
           self.rec = sr.Recognizer()
-
+          #self.text = ''
       def get_speech(self):
 
            with sr.Microphone() as source:
-
+               #self.lang = input("language: es, en\n")
                print("Speak to me:\n")
 
                #adjust the energy threshold based on the surrounding noise level
@@ -32,11 +32,31 @@ class Speech_To_Text:
                try:
                   self.text = self.rec.recognize_google(self.audio, language = self.ENG)
                   print("You told me: {}".format(self.text))
+                  #self.text.lower()
+                  #self.run_command()
 
                except Exception as e:
                   print("Sorry, could not understand you, try it again!\n")
                except UnknownValueError:
                   print("Error don't known")
 
-stt = Speech_To_Text()
-stt.get_speech()
+      def run_command(self):
+           #self.txt = self.text
+           self.HTTP = "http://www."
+           self.HTTPS = "https://www."
+           self.domains = ['.com', '.net', '.org']
+           self.page_name = ''
+
+
+           if re.search("abrir", self.text):
+              if re.search("facebook", self.text):
+                 try:
+                     self.page_name = "facebook"
+                     self.command = (self.HTTPS + self.page_name + self.domains[2])
+                     wbb.open(self.command)
+                 except Exception as e:
+                     raise e
+
+sp = Speech()
+sp.get_speech()
+sp.run_command()
