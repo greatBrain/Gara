@@ -21,4 +21,3 @@ speech_recognition
 Python pyttsx3 ---> Text-to-speech library, works offline
 service jack_control ----> started
 libportaudio-dev
->>>>>>> 17f47ba154a8505c1bbee47db42c2e3c1c4b454b
