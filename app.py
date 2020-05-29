@@ -30,10 +30,8 @@ class Speech:
                self.audio = self.rec.listen(source)
 
                try:
-                  self.text = self.rec.recognize_google(self.audio, language = self.ENG)
+                  self.text = self.rec.recognize_google(self.audio, language = self.SPAN)
                   print("You told me: {}".format(self.text))
-                  #self.text.lower()
-                  #self.run_command()
 
                except Exception as e:
                   print("Sorry, could not understand you, try it again!\n")
@@ -48,11 +46,11 @@ class Speech:
            self.page_name = ''
 
 
-           if re.search("abrir", self.text):
-              if re.search("facebook", self.text):
+           if re.search("Abrir", self.text):
+              if re.search("Facebook", self.text):
                  try:
                      self.page_name = "facebook"
-                     self.command = (self.HTTPS + self.page_name + self.domains[2])
+                     self.command = (self.HTTPS + self.page_name + self.domains[0])
                      wbb.open(self.command)
                  except Exception as e:
                      raise e
