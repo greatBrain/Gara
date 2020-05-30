@@ -17,6 +17,9 @@ class Speech:
           self.ENG = "en-US"
           self.SPAN = "es-ES"
 
+          eng_commands = dict()
+          es_commands = dict()
+
           self.rec = sr.Recognizer()
 
       def get_speech(self):
@@ -43,7 +46,7 @@ class Speech:
            self.domains = ['.com', '.net', '.org']
            self.page_name = ''
 
-           if re.search("abrir", self.text):
+           if re.search("open", self.text):
                if re.search("facebook", self.text):
                   try:
                      self.page_name = "facebook"
