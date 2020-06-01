@@ -48,22 +48,26 @@ class Speech:
                self.audio = self.rec.listen(source)
 
                try:
-                  self.text = self.rec.recognize_google(self.audio, language = self.ENG).lower()
+                  self.text = self.rec.recognize_google(self.audio, language = self.ESP).lower()
                   print("You told me: {}".format(self.text))
                except Exception as e:
                   print("Sorry, could not understand you, try it again!\n")
                except UnknownValueError:
                   print("Error don't known")
 
-      def run_command(self):            
-           
-            try:              
-               self.page_name = 'libreoffice'
+      def run_command(self): 
+            
+            try:  
+               self.app = ''            
+               self.web_page = ''
 
-               for eng, esp in self.commands.items():
-                   if re.search(eng, self.text) or re.search(esp, self.text):
-                      subp.call(self.page_name)
-                   
+               if re.match("gara", self.text):
+                  for eng, esp in self.commands.items():
+                      if re.search(eng, self.text) or re.search(esp, self.text):
+                         #Works :)
+                         pass
+               else:
+                  print("Call me by my name!\n")     
 
 
                
