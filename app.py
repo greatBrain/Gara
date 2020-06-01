@@ -36,6 +36,7 @@ class Speech:
                            'search for':'busca'
                          } 
 
+
           self.rec = sr.Recognizer()
 
       def get_speech(self):
@@ -61,13 +62,11 @@ class Speech:
                self.app = ''            
                self.web_page = ''
 
-               if re.match("gara", self.text):
-                  for eng, esp in self.commands.items():
-                      if re.search(eng, self.text) or re.search(esp, self.text):
-                         #Works :)
-                         pass
-               else:
-                  print("Call me by my name!\n")     
+               #if re.match("akira", self.text):
+               for eng, esp in self.commands.items():
+                   if re.search(eng, self.text) or re.search(esp, self.text):
+                      if re.search("atom", self.text):
+                         subp.call('atom')  
 
 
                
