@@ -3,7 +3,9 @@ import pyttsx3 as pytt
 import os
 import subprocess as subp
 import re
+from time import *
 import webbrowser as wbb
+import requests as rqs
 
 class Text_To_Speech:
   ''' def say_text(command):
@@ -33,7 +35,7 @@ class Speech:
                            'check':'revisa',
                            'turn on':'enciende',
                            'shutdown':'apaga',
-                           'search for':'busca'
+                           'search for':'busca',
                            'what is the time':'que hora es'
                          } 
 
@@ -51,6 +53,7 @@ class Speech:
 
                try:
                   self.text = self.rec.recognize_google(self.audio, language = self.ESP).lower()
+                  self.text = str(self.text)
                   print("You told me: {}".format(self.text))
                except Exception as e:
                   print("Sorry, could not understand you, try it again!\n")
@@ -59,15 +62,26 @@ class Speech:
 
       def run_command(self): 
             
-            try:  
+            try: 
+               #Split the text said by user to obatin a command and the web/app to work in 
+               self.text_splited = re.split(' ',self.text)
+
                self.app = ''            
                self.web_page = ''
 
-               #if re.match("akira", self.text):
                for eng, esp in self.commands.items():
-                   if re.search(eng, self.text) or re.search(esp, self.text):
-                      if re.search("atom", self.text):
-                         subp.call('atom')  
+                   if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):
+                      if re.search(self.text_splited[1], self.text):
+                         #subp.call('atom') 
+                         
+                         try:
+                            pass
+                         except Exception as e:
+                            raise e
+                         finally:
+                            pass
+                   else:
+                      print("Sorry, something is wrong.. Try it again!\n")
 
 
                
