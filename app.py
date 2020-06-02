@@ -34,6 +34,7 @@ class Speech:
                            'turn on':'enciende',
                            'shutdown':'apaga',
                            'search for':'busca'
+                           'what is the time':'que hora es'
                          } 
 
 
