@@ -32,8 +32,8 @@ class Speech:
                          ]
 
           self.commands = {'open':'abre',
-                           'open web': 'abre la pagina'
-                           'open app': 'abre la aplicacion' 
+                           'open web': 'abre la pagina',
+                           'open app': 'abre la aplicacion',
                            'close':'cierra',
                            'tell':'dime', 
                            'check':'revisa',
@@ -68,7 +68,7 @@ class Speech:
             try: 
                #Split the text said by user to obatin a command and the web/app to work in 
                self.text_splited = re.split(' ',self.text)
-               
+
                for eng, esp in self.commands.items():
 
                    if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):                       
