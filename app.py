@@ -5,7 +5,8 @@ import subprocess as subp
 import re
 from time import *
 import webbrowser as wbb
-import requests as rqs
+import requests 
+from requests.exceptions import MissingSchema
 
 class Text_To_Speech:
   ''' def say_text(command):
@@ -23,10 +24,11 @@ class Speech:
           #self.protocols = ["http://www.", "http://www.", "ftp."]
           self.HTTP = "http://www."
           self.HTTPS = "http://www."
+          #self.app = ''            
+          #self.web_page = ''
 
-          self.domains = ['.com', '.net', 
-                          '.org', '.es', 
-                          '.co', '.do'
+          self.domains = ['.com', '.org', 
+                          '.net', '.es'
                          ]
 
           self.commands = {'open':'abre', 
@@ -38,8 +40,7 @@ class Speech:
                            'search for':'busca',
                            'what is the time':'que hora es'
                          } 
-
-
+          
           self.rec = sr.Recognizer()
 
       def get_speech(self):
@@ -52,7 +53,7 @@ class Speech:
                self.audio = self.rec.listen(source)
 
                try:
-                  self.text = self.rec.recognize_google(self.audio, language = self.ESP).lower()
+                  self.text = self.rec.recognize_google(self.audio, language = self.ENG).lower()
                   self.text = str(self.text)
                   print("You told me: {}".format(self.text))
                except Exception as e:
@@ -64,34 +65,45 @@ class Speech:
             
             try: 
                #Split the text said by user to obatin a command and the web/app to work in 
-               self.text_splited = re.split(' ',self.text)
-
-               self.app = ''            
-               self.web_page = ''
+               self.text_splited = re.split(' ',self.text)               
 
                for eng, esp in self.commands.items():
-                   if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):
-                      if re.search(self.text_splited[1], self.text):
-                         #subp.call('atom') 
-                         
-                         try:
-                            pass
-                         except Exception as e:
-                            raise e
-                         finally:
-                            pass
+                   if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):                       
+                      self.open_web(self.text_splited[1])                        
+                        
                    else:
                       print("Sorry, something is wrong.. Try it again!\n")
-
-
-               
-               '''if re.search("open", self.text):
-                  self.command = (self.HTTPS + self.page_name + self.domains[0])
-                  wbb.open(self.command)'''
 
             except Exception as e:
                    raise e
 
+      def open_web(self, web_name):
+           
+           try:
+              
+              self.stop = True
+              while self.stop:                  
+                  for dom in range(len(self.domains)):
+                      self.website = (self.HTTPS + web_name + self.domains[dom])                     
+                      self.request = requests.get(self.website)
+
+                      if self.request:
+                         wbb.open(self.website)
+                         self.stop = False
+                      
+                      else:
+                         continue              
+
+           except MissingSchema as m:
+              print("The provided URL is invalid. Try again!\n")
+              raise m
+           except Exception as e:
+              raise e
+           finally:
+              pass
+      
+      def open_app(self, app):
+          pass
 
       def add_to_file(self, word):
           self.words = open("words.txt", "w+")
