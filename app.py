@@ -31,7 +31,9 @@ class Speech:
                           '.net', '.es'
                          ]
 
-          self.commands = {'open':'abre', 
+          self.commands = {'open':'abre',
+                           'open web': 'abre la pagina'
+                           'open app': 'abre la aplicacion' 
                            'close':'cierra',
                            'tell':'dime', 
                            'check':'revisa',
@@ -65,12 +67,12 @@ class Speech:
             
             try: 
                #Split the text said by user to obatin a command and the web/app to work in 
-               self.text_splited = re.split(' ',self.text)               
-
+               self.text_splited = re.split(' ',self.text)
+               
                for eng, esp in self.commands.items():
+
                    if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):                       
-                      self.open_web(self.text_splited[1])                        
-                        
+                      self.open_web(self.text_splited[1])                       
                    else:
                       print("Sorry, something is wrong.. Try it again!\n")
 
@@ -79,9 +81,9 @@ class Speech:
 
       def open_web(self, web_name):
            
-           try:
-              
+           try:              
               self.stop = True
+
               while self.stop:                  
                   for dom in range(len(self.domains)):
                       self.website = (self.HTTPS + web_name + self.domains[dom])                     
@@ -89,8 +91,7 @@ class Speech:
 
                       if self.request:
                          wbb.open(self.website)
-                         self.stop = False
-                      
+                         self.stop = False                      
                       else:
                          continue              
 
@@ -110,7 +111,6 @@ class Speech:
 
           for i in len(words):
              self.words.write(i)
-
           self.words.close()
 
 sp = Speech()
