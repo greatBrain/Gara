@@ -18,14 +18,14 @@ class Text_To_Speech:
 
 class Speech:
       def __init__(self):
+
+          #Supported laanguages
           self.ENG = "en-US"
           self.ESP = "es-ES"
 
           #self.protocols = ["http://www.", "http://www.", "ftp."]
           self.HTTP = "http://www."
           self.HTTPS = "http://www."
-          #self.app = ''            
-          #self.web_page = ''
 
           self.domains = ['.com', '.org', 
                           '.net', '.es'
@@ -70,9 +70,9 @@ class Speech:
                self.text_splited = re.split(' ',self.text)
 
                for eng, esp in self.commands.items():
-
                    if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):                       
-                      self.open_web(self.text_splited[1])                       
+                      #self.open_web(self.text_splited[1])
+                      #self.open_app(self.text_splited[1])                      
                    else:
                       print("Sorry, something is wrong.. Try it again!\n")
 
@@ -104,7 +104,7 @@ class Speech:
               pass
       
       def open_app(self, app):
-          pass
+          subp.call(app)
 
       def add_to_file(self, word):
           self.words = open("words.txt", "w+")
