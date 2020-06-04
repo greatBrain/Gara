@@ -32,8 +32,8 @@ class Speech:
                          ]
 
           self.commands = {'open':'abre',
-                           'open web': 'abre la pagina',
-                           'open app': 'abre la aplicacion',
+                           'openweb': 'abrelapagina',
+                           'openprogram': 'abrelaaplicacion',
                            'close':'cierra',
                            'tell':'dime', 
                            'check':'revisa',
@@ -68,15 +68,20 @@ class Speech:
             try: 
                #Split the text said by user to obatin a command and the web/app to work in 
                self.text_splited = re.split(' ',self.text)
+               #self.command = self.text_splited[0] + self.text_splited[1]
 
                for eng, esp in self.commands.items():
-                   if re.search(eng, self.text_splited[0]) or re.search(esp, self.text_splited[0]):                       
-                      #self.open_web(self.text_splited[1])
-                      #self.open_app(self.text_splited[1])                      
-                   else:
-                      print("Sorry, something is wrong.. Try it again!\n")
+                   for i in range(len(self.text_splited)):
+                       if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]): 
+                          #Call open_web, or open_app function
+                          #self.open_app(self.text_splited[i+1])
+                          #self.open_web(self.text_splited[i+1])
+                          pass                     
+                       else:
+                          print("Sorry, something is wrong.. Try it again!\n")
 
             except Exception as e:
+                   print("Command invalid. Please check the availeable commands that you can tell me!\n")
                    raise e
 
       def open_web(self, web_name):
