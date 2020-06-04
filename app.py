@@ -55,7 +55,7 @@ class Speech:
                self.audio = self.rec.listen(source)
 
                try:
-                  self.text = self.rec.recognize_google(self.audio, language = self.ENG).lower()
+                  self.text = self.rec.recognize_google(self.audio, language = self.ESP).lower()
                   self.text = str(self.text)
                   print("You told me: {}".format(self.text))
                except Exception as e:
@@ -75,8 +75,8 @@ class Speech:
                        if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]): 
                           #Call open_web, or open_app function
                           #self.open_app(self.text_splited[i+1])
-                          #self.open_web(self.text_splited[i+1])
-                          pass                     
+                          self.open_web(self.text_splited[i+1])
+                          #pass                     
                        else:
                           print("Sorry, something is wrong.. Try it again!\n")
 
