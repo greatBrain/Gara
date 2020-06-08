@@ -23,7 +23,6 @@ class Speech:
           self.ENG = "en-US"
           self.ESP = "es-ES"
 
-          #self.protocols = ["http://www.", "http://www.", "ftp."]
           self.HTTP = "http://www."
           self.HTTPS = "http://www."
 
@@ -58,8 +57,10 @@ class Speech:
                   self.text = self.rec.recognize_google(self.audio, language = self.ESP).lower()
                   self.text = str(self.text)
                   print("You told me: {}".format(self.text))
+
                except Exception as e:
                   print("Sorry, could not understand you, try it again!\n")
+
                except UnknownValueError:
                   print("Error don't known")
 
@@ -68,15 +69,14 @@ class Speech:
             try: 
                #Split the text said by user to obatin a command and the web/app to work in 
                self.text_splited = re.split(' ',self.text)
-               #self.command = self.text_splited[0] + self.text_splited[1]
 
                for eng, esp in self.commands.items():
                    for i in range(len(self.text_splited)):
-                       if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]): 
-                          #Call open_web, or open_app function
+                       if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]):
+                          
                           #self.open_app(self.text_splited[i+1])
                           self.open_web(self.text_splited[i+1])
-                          #pass                     
+
                        else:
                           print("Sorry, something is wrong.. Try it again!\n")
 
@@ -109,7 +109,11 @@ class Speech:
               pass
       
       def open_app(self, app):
-          subp.call(app)
+          try:
+             subp.call(app)
+          except Exception as e:
+             print("Could not open or find the program. Try again!\n")
+             raise e
 
       def add_to_file(self, word):
           self.words = open("words.txt", "w+")
