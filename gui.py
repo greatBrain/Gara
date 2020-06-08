@@ -14,38 +14,25 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.config import Config
 
-
-Config.set('graphics', 'resizable', False)
-Window.clearcolor = (1, 1, 1, 1)
-
-Builder.load_string("""
+'''Builder.load_string("""
 
 <main_window>:
 
     source: 'src/mic.png'
     
-""")
+""") '''
 
 
-class main_window(ButtonBehavior, Image, App, BoxLayout):
-              
-      '''def build(self):
-         self.btn = Button(
-                     background_normal = 'src/mic.png', 
-                     #background_down = 'down.png', 
-  
-                     # Added the border property to round the corners of the button 
-                     border = (30, 30, 30, 30),
-                       
-                     size_hint = (.3, .3), 
-                     pos_hint = {"x":0.35, "y":0.3} 
-                   )  
-  
-        # Returning the button 
-         return self.btn '''
+class main_window(ButtonBehavior, Image, App, BoxLayout):     
 
       def build(self):
+          Config.set('graphics', 'resizable', False)          
+          Window.clearcolor = (1, 1, 1, 1)
+          Window.size = (540,600)
           return self
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
+     #Write the configuration made into a file:
+     Config.write()    
      main_window().run()
+     
