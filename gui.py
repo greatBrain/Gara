@@ -2,6 +2,7 @@
 running on kivy'''
 
 import src
+import main
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -20,16 +21,47 @@ from kivy.config import Config
 
     source: 'src/mic.png'
     
+    
+    on_release:
+       
+       
+        self.text = "hola"
+    
 """) '''
 
 
-class main_window(ButtonBehavior, Image, App, BoxLayout):     
+class main_window(Button, ButtonBehavior, Image, App, BoxLayout):     
 
-      def build(self):
+       '''def build(self):
           Config.set('graphics', 'resizable', False)          
-          Window.clearcolor = (1, 1, 1, 1)
+          #Window.clearcolor = (1, 1, 1, 1)
           Window.size = (540,600)
-          return self
+          return self'''
+
+       def build(self):
+            # create a fully styled functional button 
+            # Adding images normal.png and down.png 
+
+            Config.set('graphics', 'resizable', False)          
+            Window.clearcolor = (1, 1, 1, 1)
+            Window.size = (550,580)            
+            Window.set_system_cursor("hand")
+            
+            self.btn = Button(background_normal = 'src/mic.png',
+                  size_hint = (.8, .8), 
+                  pos_hint = {"x":0.10, "y":0.2} 
+            )
+
+            # bind() use to bind the button to function callback  
+            self.btn.bind(on_press = self.callback)  
+            return self.btn  
+    
+       # callback function tells when button pressed  
+       def callback(self, event):
+         self.main = main.Speech()
+         self.main.get_speech()
+         self.main.run_command()
+
 
 if __name__ == "__main__":
      #Write the configuration made into a file:

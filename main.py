@@ -122,6 +122,6 @@ class Speech:
              self.words.write(i)
           self.words.close()
 
-sp = Speech()
+'''sp = Speech()
 sp.get_speech()
-sp.run_command()
+sp.run_command()'''
