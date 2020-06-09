@@ -29,7 +29,6 @@ from kivy.config import Config
     
 """) '''
 
-
 class main_window(Button, ButtonBehavior, Image, App, BoxLayout):     
 
        '''def build(self):
@@ -39,24 +38,23 @@ class main_window(Button, ButtonBehavior, Image, App, BoxLayout):
           return self'''
 
        def build(self):
-            # create a fully styled functional button 
-            # Adding images normal.png and down.png 
-
             Config.set('graphics', 'resizable', False)          
-            Window.clearcolor = (1, 1, 1, 1)
-            Window.size = (550,580)            
+            Window.clearcolor = (0,0,0,0)
+            Window.size = (490,600)            
             Window.set_system_cursor("hand")
-            
+
             self.btn = Button(background_normal = 'src/mic.png',
-                  size_hint = (.8, .8), 
-                  pos_hint = {"x":0.10, "y":0.2} 
+                  size = (100, 25),               
+                  size_hint = (.8, .7), 
+                  pos_hint = {"x":0.12, "y":0.2} 
             )
 
             # bind() use to bind the button to function callback  
             self.btn.bind(on_press = self.callback)  
             return self.btn  
     
-       # callback function tells when button pressed  
+       # callback function, when button pressed, 
+       # create a main object and then calls its two funtions:  
        def callback(self, event):
          self.main = main.Speech()
          self.main.get_speech()
