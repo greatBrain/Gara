@@ -8,7 +8,7 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.button import ButtonBehavior
 from kivy.uix.image import Image
-from screeninfo import get_monitors
+#from screeninfo import get_monitors
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
