@@ -24,9 +24,11 @@ from requests.exceptions import MissingSchema
           #engine.endLoop() '''
 
 class audio:
+      def __init__(self, audio_file):
+          self.audio_file = audio_file
 
-      def play_audio(self, audio_file):
-          playsound(audio_file)
+      def play_audio(self):
+          playsound(self.audio_file)
 
 class Speech:
       def __init__(self):
@@ -43,7 +45,7 @@ class Speech:
                          ]
 
           self.commands = {'application':'aplicación',
-                           'web': 'web',
+                           'page': 'page',
                            'close':'cierra',
                            'tell':'dime', 
                            'check':'revisa',
@@ -84,23 +86,24 @@ class Speech:
                for eng, esp in self.commands.items():
                    for i in range(len(self.text_splited)):
                        if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]):
+                           if eng=='application' or esp=='aplicación':
+                              audio = audio('audio/opening_app.wav')
+                              audio.play_audio()
+                              self.open_app(self.text_splited[i+1])
 
-                          if eng=='application' or esp=='aplicación':
-                             playsound('audio/opening_app.wav')
-                             self.open_app(self.text_splited[i+1])
+                           elif eng=='page' or esp=='page':
 
-                          elif eng=='web' or esp=='web':
-                             playsound('audio/opening_web.wav')
-                             self.open_web(self.text_splited[i + 1])
+                              audio = audio('audio/opening_web.wav')
+                              audio.play_audio()
+                              self.open_web(self.text_splited[i + 1])
 
-                          else:
-                             self.ttsp = Text_To_Speech("No entiendo lo que deseas, por favor intentalo otra vez")
-                             del(self.ttsp)
+                           else:
+                              pass
                        else:
                           print("Sorry, something is wrong.. Try it again!\n")
 
             except Exception as e:
-                   print("Command invalid. Please check the availeable commands that you can tell me!\n")
+                   print("Invalid command. Please check the available commands that you can tell me!\n")
                    raise e
 
       def open_web(self, web_name):

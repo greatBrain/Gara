@@ -3,6 +3,7 @@ running on kivy'''
 
 import src
 import main
+from audio import *
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -31,8 +32,14 @@ from kivy.config import Config
 
 class main_window(Button, ButtonBehavior, Image, App, BoxLayout):
 
+       def play_welcome_audio(self):
+           audio = main.audio('audio/welcome_night.wav')
+           audio.play_audio()
+
+
        def build(self):
-            Config.set('graphics', 'resizable', False)          
+            self.play_welcome_audio()
+            Config.set('graphics', 'resizable', False)
             Window.clearcolor = (0,0,0,0)
             Window.size = (490,600)            
             Window.set_system_cursor("hand")
