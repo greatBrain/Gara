@@ -1,5 +1,5 @@
 import speech_recognition as sr
-import pyttsx3 as pytt
+#import pyttsx3 as pytt
 import os
 import subprocess as subp
 import re
@@ -9,11 +9,15 @@ import requests
 from requests.exceptions import MissingSchema
 
 class Text_To_Speech:
-  ''' def say_text(command):
+      '''def __int__(self, message):
+          self.message = message
+
+      def say_text(command):
           #Initialize the engine
           engine = pytt.init()
           engine.say(command)
-          engine.runAndWait() '''
+          engine.runAndWait()'''
+      pass
 
 
 class Speech:
@@ -30,9 +34,8 @@ class Speech:
                           '.net', '.es'
                          ]
 
-          self.commands = {'open':'abre',
-                           'openweb': 'abrelapagina',
-                           'openprogram': 'abrelaaplicacion',
+          self.commands = {'application':'aplicación',
+                           'web': 'web',
                            'close':'cierra',
                            'tell':'dime', 
                            'check':'revisa',
@@ -73,10 +76,14 @@ class Speech:
                for eng, esp in self.commands.items():
                    for i in range(len(self.text_splited)):
                        if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]):
-                          
-                          #self.open_app(self.text_splited[i+1])
-                          self.open_web(self.text_splited[i+1])
 
+                          if eng=='application' or esp=='aplicación':
+                             self.open_app(self.text_splited[i+1])
+                          elif eng=='web' or esp=='web':
+                             self.open_web(self.text_splited[i + 1])
+                          else:
+                             '''Text_To_Speech("No entiendo lo que deseas, por favor intentalo otra vez")'''
+                             pass
                        else:
                           print("Sorry, something is wrong.. Try it again!\n")
 
@@ -115,12 +122,12 @@ class Speech:
              print("Could not open or find the program. Try again!\n")
              raise e
 
-      def add_to_file(self, word):
+      '''def add_to_file(self, word):
           self.words = open("words.txt", "w+")
 
           for i in len(words):
              self.words.write(i)
-          self.words.close()
+          self.words.close()'''
 
 '''sp = Speech()
 sp.get_speech()
