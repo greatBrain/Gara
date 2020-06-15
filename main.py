@@ -1,24 +1,32 @@
 import speech_recognition as sr
+from playsound import playsound
 #import pyttsx3 as pytt
 import os
 import subprocess as subp
 import re
-from time import *
+#from time import *
 import webbrowser as wbb
-import requests 
+import requests
 from requests.exceptions import MissingSchema
 
-class Text_To_Speech:
-      '''def __int__(self, message):
-          self.message = message
+'''class Text_To_Speech:
+      def __int__(self):
+          pass
 
-      def say_text(command):
+      def say(self, message):
           #Initialize the engine
           engine = pytt.init()
-          engine.say(command)
-          engine.runAndWait()'''
-      pass
+          voices = engine.getProperty('voices')
+          engine.setProperty('voice', voices[1].id)
+          engine.setProperty('rate', 150)
+          engine.say(message)
+          engine.runAndWait()
+          #engine.endLoop() '''
 
+class audio:
+
+      def play_audio(self, audio_file):
+          playsound(audio_file)
 
 class Speech:
       def __init__(self):
@@ -78,12 +86,16 @@ class Speech:
                        if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]):
 
                           if eng=='application' or esp=='aplicación':
+                             playsound('audio/opening_app.wav')
                              self.open_app(self.text_splited[i+1])
+
                           elif eng=='web' or esp=='web':
+                             playsound('audio/opening_web.wav')
                              self.open_web(self.text_splited[i + 1])
+
                           else:
-                             '''Text_To_Speech("No entiendo lo que deseas, por favor intentalo otra vez")'''
-                             pass
+                             self.ttsp = Text_To_Speech("No entiendo lo que deseas, por favor intentalo otra vez")
+                             del(self.ttsp)
                        else:
                           print("Sorry, something is wrong.. Try it again!\n")
 

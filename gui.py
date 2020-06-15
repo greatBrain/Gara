@@ -29,13 +29,7 @@ from kivy.config import Config
     
 """) '''
 
-class main_window(Button, ButtonBehavior, Image, App, BoxLayout):     
-
-       '''def build(self):
-          Config.set('graphics', 'resizable', False)          
-          #Window.clearcolor = (1, 1, 1, 1)
-          Window.size = (540,600)
-          return self'''
+class main_window(Button, ButtonBehavior, Image, App, BoxLayout):
 
        def build(self):
             Config.set('graphics', 'resizable', False)          
