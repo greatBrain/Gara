@@ -4,12 +4,12 @@ running on kivy'''
 import src
 import main
 from audio import *
+import time
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.button import ButtonBehavior
 from kivy.uix.image import Image
-#from screeninfo import get_monitors
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
@@ -33,9 +33,26 @@ from kivy.config import Config
 class main_window(Button, ButtonBehavior, Image, App, BoxLayout):
 
        def play_welcome_audio(self):
-           audio = main.audio('audio/welcome_night.wav')
-           audio.play_audio()
+           """Get the current time and convert the string representing hour in a int"""
 
+           self.time = time.localtime(time.time())
+           self.current_time = time.strftime("%H:%M:%S", self.time)
+
+           list(self.current_time)
+           self.hour = int(self.current_time[0:2])
+
+           if self.hour >=1 and self.hour<= 12:
+               audio = main.audio('audio/welcome_day.wav')
+               audio.play_audio()
+               del(audio)
+           elif self.hour >=13 and self.hour<=20:
+               audio = main.audio('audio/welcome_noon.wav')
+               audio.play_audio()
+               del(audio)
+           elif self.hour >= 20 and self.hour<= 23:
+               audio = main.audio('audio/welcome_night.wav')
+               audio.play_audio()
+               del(audio)
 
        def build(self):
             self.play_welcome_audio()

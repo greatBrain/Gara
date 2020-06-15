@@ -9,19 +9,6 @@ import webbrowser as wbb
 import requests
 from requests.exceptions import MissingSchema
 
-'''class Text_To_Speech:
-      def __int__(self):
-          pass
-
-      def say(self, message):
-          #Initialize the engine
-          engine = pytt.init()
-          voices = engine.getProperty('voices')
-          engine.setProperty('voice', voices[1].id)
-          engine.setProperty('rate', 150)
-          engine.say(message)
-          engine.runAndWait()
-          #engine.endLoop() '''
 
 class audio:
       def __init__(self, audio_file):
@@ -45,14 +32,12 @@ class Speech:
                          ]
 
           self.commands = {'application':'aplicación',
-                           'page': 'page',
+                           'web': 'web',
                            'close':'cierra',
-                           'tell':'dime', 
+                           'tell me':'dime',
                            'check':'revisa',
                            'turn on':'enciende',
-                           'shutdown':'apaga',
-                           'search for':'busca',
-                           'what is the time':'que hora es'
+                           'shutdown':'apaga'
                          } 
           
           self.rec = sr.Recognizer()
@@ -91,12 +76,10 @@ class Speech:
                               audio.play_audio()
                               self.open_app(self.text_splited[i+1])
 
-                           elif eng=='page' or esp=='page':
-
+                           elif eng=='web' or esp=='web':
                               audio = audio('audio/opening_web.wav')
                               audio.play_audio()
                               self.open_web(self.text_splited[i + 1])
-
                            else:
                               pass
                        else:
