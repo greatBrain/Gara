@@ -4,7 +4,6 @@ from playsound import playsound
 import os
 import subprocess as subp
 import re
-#from time import *
 import webbrowser as wbb
 import requests
 from requests.exceptions import MissingSchema
@@ -65,25 +64,31 @@ class Speech:
       def run_command(self): 
             
             try: 
-               #Split the text said by user to obatin a command and the web/app to work in 
-               self.text_splited = re.split(' ',self.text)
+               while True:
+                   # Split the text said by user to obatin a command and the web/app to work in
+                   self.text_splited = re.split(' ', self.text)
 
-               for eng, esp in self.commands.items():
-                   for i in range(len(self.text_splited)):
-                       if re.search(eng,self.text_splited[i]) or re.search(esp,self.text_splited[i]):
-                           if eng=='application' or esp=='aplicación':
-                              audio = audio('audio/opening_app.wav')
-                              audio.play_audio()
-                              self.open_app(self.text_splited[i+1])
+                   for eng, esp in self.commands.items():
+                       for i in range(len(self.text_splited)):
+                           if re.search(eng, self.text_splited[i]) or re.search(esp, self.text_splited[i]):
+                               if eng == 'application' or esp == 'aplicación':
+                                   audio = audio('audio/opening_app.wav')
+                                   audio.play_audio()
+                                   self.open_app(self.text_splited[i + 1])
 
-                           elif eng=='web' or esp=='web':
-                              audio = audio('audio/opening_web.wav')
-                              audio.play_audio()
-                              self.open_web(self.text_splited[i + 1])
+                                   continue
+
+                               elif eng == 'web' or esp == 'web':
+                                   audio = audio('audio/opening_web.wav')
+                                   audio.play_audio()
+                                   self.open_web(self.text_splited[i + 1])
+
+                                   continue
+                               else:
+                                   pass
                            else:
-                              pass
-                       else:
-                          print("Sorry, something is wrong.. Try it again!\n")
+                               print("Sorry, something is wrong.. Try it again!\n")
+                               continue
 
             except Exception as e:
                    print("Invalid command. Please check the available commands that you can tell me!\n")

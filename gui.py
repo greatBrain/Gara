@@ -45,7 +45,7 @@ class main_window(Button, ButtonBehavior, Image, App, BoxLayout):
                audio = main.audio('audio/welcome_day.wav')
                audio.play_audio()
                del(audio)
-           elif self.hour >=13 and self.hour<=20:
+           elif self.hour >=13 and self.hour<=19:
                audio = main.audio('audio/welcome_noon.wav')
                audio.play_audio()
                del(audio)
