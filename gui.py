@@ -42,17 +42,17 @@ class main_window(Button, ButtonBehavior, Image, App, BoxLayout):
            self.hour = int(self.current_time[0:2])
 
            if self.hour >=1 and self.hour<= 12:
-               audio = main.audio('audio/welcome_day.wav')
-               audio.play_audio()
+               self.audio_class = main.Audio('audio/welcome_day.wav')
+               self.audio_class.play_audio()
                del(audio)
            elif self.hour >=13 and self.hour<=19:
-               audio = main.audio('audio/welcome_noon.wav')
-               audio.play_audio()
-               del(audio)
+               self.audio_class = main.Audio('audio/welcome_noon.wav')
+               self.audio_class.play_audio()
+               del(self.audio_class)
            elif self.hour >= 20 and self.hour<= 23:
-               audio = main.audio('audio/welcome_night.wav')
-               audio.play_audio()
-               del(audio)
+               self.audio_class = main.Audio('audio/welcome_night.wav')
+               self.audio_class.play_audio()
+               del(self.audio_class)
 
        def build(self):
             self.play_welcome_audio()
