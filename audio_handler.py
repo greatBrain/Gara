@@ -11,11 +11,10 @@ class Audio:
         playsound(self.audio_file)
 
     def greet(self):
-
-        '''get the returned function and converts it in a list'''
+        
         self.time = list(self.date_time_handler.get_time())
-        self.whole_time = ''.join(self.time)
-        self.hour = int(self.whole_time[0:2])
+        self.entire_time = ''.join(self.time)
+        self.hour = int(self.entire_time[0:2])
 
 
         if self.hour >= 1 and self.hour <= 12:
