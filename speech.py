@@ -6,11 +6,13 @@ import re
 import webbrowser as wbb
 import requests
 from requests.exceptions import MissingSchema
-import audio
+import audio_handler
 
 class Speech:
     def __init__(self):
-        self.audio = audio.Audio()
+        self.audio = audio_handler.Audio()
+        self.audio.greet()
+        self.rec = sr.Recognizer()
 
         # Supported laanguages
         self.ENG = "en-US"
@@ -31,8 +33,6 @@ class Speech:
                          'turn on': 'enciende',
                          'shutdown': 'apaga'
                          }
-
-        self.rec = sr.Recognizer()
 
     def get_speech(self):
 

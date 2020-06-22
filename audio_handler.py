@@ -9,12 +9,11 @@ class Audio:
         self.audio_file = audio_file
         playsound(self.audio_file)
 
-    def get_time(self):
+    def greet(self):
         """Get the current time and convert the string representing hour in a int"""
 
         self.time = time.localtime(time.time())
         self.current_time = time.strftime("%H:%M:%S", self.time)
-
         list(self.current_time)
         self.hour = int(self.current_time[0:2])
 
