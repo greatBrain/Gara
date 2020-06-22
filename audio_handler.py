@@ -1,21 +1,22 @@
 from playsound import playsound
 import time
+import date_time_handler as dth
 
 class Audio:
     def __init__(self, ):
-        pass
+        self.date_time_handler = dth.Date_And_Time()
 
     def play_audio(self, audio_file):
         self.audio_file = audio_file
         playsound(self.audio_file)
 
     def greet(self):
-        """Get the current time and convert the string representing hour in a int"""
 
-        self.time = time.localtime(time.time())
-        self.current_time = time.strftime("%H:%M:%S", self.time)
-        list(self.current_time)
-        self.hour = int(self.current_time[0:2])
+        '''get the returned function and converts it in a list'''
+        self.time = list(self.date_time_handler.get_time())
+        self.whole_time = ''.join(self.time)
+        self.hour = int(self.whole_time[0:2])
+
 
         if self.hour >= 1 and self.hour <= 12:
            self.play_audio('audio/welcome_day.wav')
