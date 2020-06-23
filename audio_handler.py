@@ -11,7 +11,7 @@ class Audio:
         playsound(self.audio_file)
 
     def greet(self):
-        
+
         self.time = list(self.date_time_handler.get_time())
         self.entire_time = ''.join(self.time)
         self.hour = int(self.entire_time[0:2])
