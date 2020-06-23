@@ -1,5 +1,5 @@
 # Gara
-# My own version of a Virtual assistant, actually runs just on Linux. Then, will see what happen ;)
+# My own version of a Virtual assistant ;)
 
 
 Gara Virtual Assistent version 0.0.1 June 2020

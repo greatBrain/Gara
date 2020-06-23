@@ -38,15 +38,15 @@ class Task:
                    if re.search(eng, self.text_splited[i]) or re.search(esp, self.text_splited[i]):
 
                        if eng == 'application' or esp == 'aplicación':
-                         self.audio.play_audio('audio/opening_app.wav')
-                         self.open_app(self.text_splited[i + 1])
+                          self.audio.play_audio('audio/opening_app.wav')
+                          self.open_app(self.text_splited[i + 1])
 
                        elif eng == 'web' or esp == 'web':
-                         self.audio.play_audio('audio/opening_web.wav')
-                         self.open_web(self.text_splited[i + 1])
+                            self.audio.play_audio('audio/opening_web.wav')
+                            self.open_web(self.text_splited[i + 1])
 
                        else:
-                          pass
+                           pass
                    else:
                       print("Sorry, something is wrong.. Try it again!\n")
 
@@ -86,3 +86,8 @@ class Task:
     def say_time(self):
         dth.Date_And_Time().get_time()
 
+    def say_date(self):
+        dth.Date_And_Time().get_date()
+
+    def say_date_time(self):
+        dth.Date_And_Time().get_date_and_time()

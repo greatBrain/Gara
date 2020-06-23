@@ -1,11 +1,8 @@
 import speech_recognition as sr
 #import pyttsx3 as pytt
-import audio_handler
 
 class Speech:
     def __init__(self):
-        self.audio = audio_handler.Audio()
-        self.audio.greet()
         self.rec = sr.Recognizer()
 
         # Supported laanguages

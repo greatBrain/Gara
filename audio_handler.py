@@ -1,9 +1,8 @@
 from playsound import playsound
-import time
 import date_time_handler as dth
 
 class Audio:
-    def __init__(self, ):
+    def __init__(self):
         self.date_time_handler = dth.Date_And_Time()
 
     def play_audio(self, audio_file):
