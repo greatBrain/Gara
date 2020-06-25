@@ -11,3 +11,6 @@ class Db_Handler:
 
       def get_conn(self):
           return self.connection
+
+      def close_conn(self):
+          return self.connection.close()

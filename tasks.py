@@ -7,6 +7,8 @@ from requests.exceptions import MissingSchema
 import audio_handler
 import speech as sp
 import date_time_handler as dth
+import reminder
+
 
 class Task:
     def __init__(self):
@@ -91,3 +93,4 @@ class Task:
 
     def say_date_time(self):
         dth.Date_And_Time().get_date_and_time()
+
