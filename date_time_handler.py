@@ -19,5 +19,5 @@ class Date_And_Time:
           return datetime.today().strftime('%Y-%m-%d-%H:%M')
 
 
-#Date_And_Time().get_date_and_time()
+Date_And_Time().get_date_and_time()
 
