@@ -1,16 +1,15 @@
 import speech_recognition as sr
-#import pyttsx3 as pytt
 
 class Speech:
     def __init__(self):
-        self.rec = sr.Recognizer()
+        self.rec = sr.Recognizer()        
 
         # Supported laanguages
         self.ENG = "en-US"
         self.ESP = "es-ES"
 
         '''Save the user command'''
-        self.text = ''
+        self.text = str()
 
     def get_speech(self):
 
@@ -22,8 +21,8 @@ class Speech:
              self.audio = self.rec.listen(source)
 
              try:
-                 self.text = self.rec.recognize_google(self.audio, language=self.ESP).lower()
-                 self.text = str(self.text)
+                 self.voice = self.rec.recognize_google(self.audio, language=self.ENG).lower()
+                 self.text = str(self.voice)
                  print("You told me: {}".format(self.text))
 
              except Exception as e:

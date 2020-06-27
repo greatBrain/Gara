@@ -4,7 +4,6 @@ import subprocess as subp
 import webbrowser as wbb
 import requests
 from requests.exceptions import MissingSchema
-import audio_handler
 from speech import Speech
 from text_to_speech import Text_To_Speech
 import date_time_handler as dth
@@ -13,9 +12,7 @@ import reminder
 
 class Task:
     def __init__(self):
-        self.speech = Speech()
-        self.audio = audio_handler.Audio()
-        self.user_command = self.speech.get_command()
+        self.user_command = Speech().get_command()
 
         self.HTTP = "http://www."
         self.HTTPS = "http://www."
@@ -24,11 +21,9 @@ class Task:
                         '.net', '.es'
                         ]
 
-        self.commands = {'application': 'aplicación',
+        self.commands = {'application':'aplicación',
                          'web': 'web',
-                         'close': 'cierra',
                          'time':'hora',
-                         'check': 'revisa',
                          'schedule':'agenda'
                          }
 
@@ -42,24 +37,22 @@ class Task:
                    if re.search(eng, self.text_splited[i]) or re.search(esp, self.text_splited[i]):
 
                        if eng == 'application' or esp == 'aplicación':
-                          self.audio.play_audio('audio/opening_app.wav')
-                          self.open_app(self.text_splited[i + 1])
+                            self.open_app(self.text_splited[i + 1])
 
                        elif eng == 'web' or esp == 'web':
-                            self.audio.play_audio('audio/opening_web.wav')
                             self.open_web(self.text_splited[i + 1])
 
                        elif eng == 'time' or esp == 'hora':
-                           self.say_time()
+                            self.say_time()
                        else:
                            pass
                    else:
-                      Text_To_Speech().translate("Sorry, something is wrong.. Try it again!")
+                      Text_To_Speech().translate('Sorry, something is wrong.. Try it again!')
                       Text_To_Speech().save_and_play()
 
         except Exception as e:
             print("Invalid command. Please check the commands list!\n")
-            raise e
+            print(e)
 
     def open_web(self, web_name):
 
