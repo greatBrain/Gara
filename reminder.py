@@ -10,7 +10,7 @@ class Reminder:
       def __init__(self):
           self.conn = dbh.Db_Handler().get_conn()
           self.cursor = self.conn.cursor()
-          self.dth = dth.Date_And_Time()
+          self.date_time_handler = dth.Date_And_Time()
 
           self.task = ''
 
@@ -36,12 +36,12 @@ class Reminder:
           for i in self.cursor.execute("SELECT * FROM reminder"):
               #self.rowid = i[0]
 
-              if i[0] == self.dth.get_date():
-                 if self.dth.get_time() == i[1]:
+              if i[0] == self.date_time_handler.get_date():
+                 if self.date_time_handler.get_time() == i[1]:
                     self.task = i[2]
                     self.task_to_speech(self.task)
                     #Then, call the function that deletes tha task from dabase:
-                    #self.delete_task()
+                    #self.delete_task(rowid)
                  else:
                     return "Time out!"
               else:
@@ -58,7 +58,7 @@ class Reminder:
           self.cursor.execute("DELETE FROM reminder WHERE rowid=?", (rowid))
 
 
-r = Reminder()
-dth = dth.Date_And_Time()
+#r = Reminder()
+#dth = dth.Date_And_Time()
 #r.set_new_task('2020-06-26', '20:39', 'this is a joke. i am the joker')
-r.remind_task()
+#r.remind_task()

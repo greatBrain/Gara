@@ -9,12 +9,15 @@ class Speech:
         self.ENG = "en-US"
         self.ESP = "es-ES"
 
+        '''Save the user command'''
+        self.text = ''
+
     def get_speech(self):
 
         with sr.Microphone() as source:
              print("Speak to me:\n")
 
-             # adjust the energy threshold based on the surrounding noise level
+             # adjust the energy threshold
              self.rec.adjust_for_ambient_noise(source, duration=0.2)
              self.audio = self.rec.listen(source)
 

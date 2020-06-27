@@ -11,16 +11,11 @@ class Date_And_Time:
           self.current_time = time.strftime("%H:%M", self.time)
 
           return self.current_time
-          #print(self.current_time)
 
       def get_date(self):
           return datetime.today().strftime('%Y-%m-%d')
-          #print(datetime.today().strftime('%Y-%m-%d'))
 
       def get_date_and_time(self):
           return datetime.today().strftime('%Y-%m-%d-%H:%M')
 
-
-#Date_And_Time().get_time()
-#Date_And_Time().get_date()
 

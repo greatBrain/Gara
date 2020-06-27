@@ -5,14 +5,15 @@ import webbrowser as wbb
 import requests
 from requests.exceptions import MissingSchema
 import audio_handler
-import speech as sp
+from speech import Speech
+from text_to_speech import Text_To_Speech
 import date_time_handler as dth
 import reminder
 
 
 class Task:
     def __init__(self):
-        self.speech = sp()
+        self.speech = Speech()
         self.audio = audio_handler.Audio()
         self.user_command = self.speech.get_command()
 
@@ -26,8 +27,9 @@ class Task:
         self.commands = {'application': 'aplicación',
                          'web': 'web',
                          'close': 'cierra',
-                         'say': 'dime',
-                         'check': 'revisa'
+                         'time':'hora',
+                         'check': 'revisa',
+                         'schedule':'agenda'
                          }
 
     def run_task(self):
@@ -47,10 +49,13 @@ class Task:
                             self.audio.play_audio('audio/opening_web.wav')
                             self.open_web(self.text_splited[i + 1])
 
+                       elif eng == 'time' or esp == 'hora':
+                           self.say_time()
                        else:
                            pass
                    else:
-                      print("Sorry, something is wrong.. Try it again!\n")
+                      Text_To_Speech().translate("Sorry, something is wrong.. Try it again!")
+                      Text_To_Speech().save_and_play()
 
         except Exception as e:
             print("Invalid command. Please check the commands list!\n")
@@ -86,11 +91,15 @@ class Task:
             raise e
 
     def say_time(self):
-        dth.Date_And_Time().get_time()
+        Text_To_Speech().translate(dth.Date_And_Time().get_time())
+        Text_To_Speech.save_and_play()
 
     def say_date(self):
-        dth.Date_And_Time().get_date()
+        Text_To_Speech().translate(dth.Date_And_Time().get_date())
+        Text_To_Speech.save_and_play()
 
     def say_date_time(self):
-        dth.Date_And_Time().get_date_and_time()
+        Text_To_Speech().translate(dth.Date_And_Time().get_date_and_time())
+        Text_To_Speech.save_and_play()
+
 
