@@ -12,9 +12,9 @@ class Text_To_Speech:
 
       def save_and_play(self):
           # Save the audio generated.
-          self.gtss_obj.save('audio/assistant_response.mp3')
+          self.gtss_obj.save('audio/task_reminder.mp3')
 
           #Play the audio in the audio handler module:
-          self.audio_handler_obj.play_audio('audio/assistant_response.mp3')
+          self.audio_handler_obj.play_audio('audio/task_reminder.mp3')
 
 

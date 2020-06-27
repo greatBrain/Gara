@@ -60,5 +60,5 @@ class Reminder:
 
 r = Reminder()
 dth = dth.Date_And_Time()
-#r.set_new_task('2020-06-26', '20:29', 'this is only a joke. trying the assistance')
+#r.set_new_task('2020-06-26', '20:39', 'this is a joke. i am the joker')
 r.remind_task()
