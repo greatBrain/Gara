@@ -19,7 +19,7 @@ class Task:
         self.HTTP = "http://www."
         self.HTTPS = "http://www."
 
-        self.domains = ['.com', '.org',
+        self.DOMAINS = ['.com', '.org',
                         '.net', '.es'
                         ]
 
@@ -45,12 +45,22 @@ class Task:
 
                for eng, esp in self.COMMANDS.items():
                    for i in range(len(self.command_splited)):
-                        if re.match(self.command_splited[i], eng) or re.match(self.command_splited[i], esp):
-                           self.open_web(str(self.command_splited[i+1]))
+                        if self.command_splited[i] in self.COMMANDS:
+                            if self.command_splited[i]=='web':
+                                self.open_web(self.command_splited[i+1])
+
+                            elif self.command_splited[i]=='application' or self.command_splited[i]=='applicacion':
+                                 self.open_app((self.command_splited[i+1]))
+
+                            elif self.command_splited[i]=='time' or self.command_splited[i]=='hora':
+                                 self.say_time()
 
         except Exception as e:
              print("Invalid command\n")
              print(e)
+
+    def set_schedule(self):
+        pass
 
     def open_web(self, web_name):
 
@@ -58,8 +68,8 @@ class Task:
             self.stop = False
 
             while self.stop:
-                for dom in range(len(self.domains)):
-                    self.website = (self.HTTPS + web_name + self.domains[dom])
+                for dom in range(len(self.DOMAINS)):
+                    self.website = (self.HTTPS + web_name + self.self.DOMAINS[dom])
                     self.request = requests.get(self.website)
 
                     if self.request:

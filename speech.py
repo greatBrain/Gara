@@ -13,7 +13,7 @@ class Speech:
              print("Speak to me:\n")
 
              # adjust the energy threshold
-             self.rec.adjust_for_ambient_noise(source, duration=0.2)
+             self.rec.adjust_for_ambient_noise(source, duration=3)
              self.audio = self.rec.listen(source)
 
              try:
