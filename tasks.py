@@ -14,7 +14,7 @@ import reminder
 class Task:
     def __init__(self):
         self.user_speech = Speech().get_speech()
-        self.user_command = str(self.user_speech)
+        self.assistant_call = str(self.user_speech)
 
         self.HTTP = "http://www."
         self.HTTPS = "http://www."
@@ -23,7 +23,9 @@ class Task:
                         '.net', '.es'
                         ]
 
-        self.commands = {'application':'aplicacion',
+        self.ASSISTANT_NAME = 'alexa'
+
+        self.COMMANDS = {'application':'aplicacion',
                          'web': 'web',
                          'time':'hora',
                          'date':'fecha',
@@ -33,14 +35,18 @@ class Task:
 
     def run_task(self):
         try:
-            for eng, esp in self.commands.items():
-                if self.user_command in self.commands or self.user_command in self.commands:
-                   self.say_time()
-                else:
-                   Text_To_Speech().translate_and_play("Invalid command, please try again")
+            if re.match(self.assistant_call, self.ASSISTANT_NAME):
+               Text_To_Speech().translate_and_play("Hola, como puedo ayudarte?")
+
+               self.command = Speech().get_speech()
+               str(self.command)
+
+               for eng, esp in self.COMMANDS.items():
+                   if self.command==eng or self.command==esp:
+                      self.say_time()
 
         except Exception as e:
-             print("Invalid command. Please check the commands list!\n")
+             print("Invalid command\n")
              print(e)
 
     def open_web(self, web_name):
