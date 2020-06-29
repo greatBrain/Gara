@@ -3,18 +3,20 @@ from gtts import gTTS
 import audio_handler
 
 class Text_To_Speech:
-      def __init__(self, text):
-          self.text = text
+      def __init__(self):
           self.audio_handler_obj = audio_handler.Audio()
 
-      def translate(self):
-          self.gtss_obj = gTTS(text=self.text, lang='en', slow=False)
+      def translate_and_play(self, text):
+          try:
+              self.gtss_obj = gTTS(text=text, lang='es', slow=False)
 
-      def save_and_play(self):
-          # Save the audio generated.
-          self.gtss_obj.save('audio/task_reminder.mp3')
+              # Save the audio generated.
+              self.gtss_obj.save('audio/task_reminder.mp3')
 
-          #Play the audio in the audio handler module:
-          self.audio_handler_obj.play_audio('audio/task_reminder.mp3')
+              # Play the audio in the audio handler module:
+              self.audio_handler_obj.play_audio('audio/task_reminder.mp3')
 
+          except Exception as e:
+              print("Error translating to voice\n")
+              print(e)
 

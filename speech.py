@@ -8,11 +8,7 @@ class Speech:
         self.ENG = "en-US"
         self.ESP = "es-ES"
 
-        '''Save the user command'''
-        self.text = str()
-
     def get_speech(self):
-
         with sr.Microphone() as source:
              print("Speak to me:\n")
 
@@ -22,14 +18,10 @@ class Speech:
 
              try:
                  self.voice = self.rec.recognize_google(self.audio, language=self.ENG).lower()
-                 self.text = str(self.voice)
-                 print("You told me: {}".format(self.text))
+                 return self.voice
 
              except Exception as e:
                  print("Sorry, could not understand you, try it again!\n")
 
              except sr.UnknownValueError:
                  print("Error don't known")
-
-    def get_command(self):
-        return self.text
