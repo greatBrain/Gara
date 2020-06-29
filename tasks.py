@@ -23,7 +23,7 @@ class Task:
                         '.net', '.es'
                         ]
 
-        self.ASSISTANT_NAME = 'alexa'
+        self.ASSISTANT_NAME = 'francis'
 
         self.COMMANDS = {'application':'aplicacion',
                          'web': 'web',
@@ -41,9 +41,12 @@ class Task:
                self.command = Speech().get_speech()
                str(self.command)
 
+               self.command_splited = re.split(' ', self.command)
+
                for eng, esp in self.COMMANDS.items():
-                   if self.command==eng or self.command==esp:
-                      self.say_time()
+                   for i in range(len(self.command_splited)):
+                        if re.match(self.command_splited[i], eng) or re.match(self.command_splited[i], esp):
+                           self.open_web(str(self.command_splited[i+1]))
 
         except Exception as e:
              print("Invalid command\n")
@@ -66,7 +69,7 @@ class Task:
                         continue
 
         except MissingSchema as m:
-            print("The provided URL is invalid. Try again!\n")
+            print("URL is invalid. Try again!\n")
             raise m
         except Exception as e:
             raise e
