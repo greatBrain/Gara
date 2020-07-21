@@ -8,7 +8,7 @@ from requests.exceptions import MissingSchema
 from speech import Speech
 from text_to_speech import Text_To_Speech
 import date_time_handler as dth
-import reminder
+from reminder import Reminder
 
 
 class Task:
@@ -23,7 +23,7 @@ class Task:
                         '.net', '.es'
                         ]
 
-        self.ASSISTANT_NAME = 'francis'
+        self.WAKE_WORD = 'francis'
 
         self.COMMANDS = {'application':'aplicacion',
                          'web': 'web',
@@ -35,7 +35,7 @@ class Task:
 
     def run_task(self):
         try:
-            if re.match(self.assistant_call, self.ASSISTANT_NAME):
+            if self.assistant_call in self.WAKE_WORD:
                Text_To_Speech().translate_and_play("Hola, como puedo ayudarte?")
 
                self.command = Speech().get_speech()
@@ -55,12 +55,18 @@ class Task:
                             elif self.command_splited[i]=='time' or self.command_splited[i]=='hora':
                                  self.say_time()
 
+                            elif self.command_splited[i]=='schedule' or self.command_splited[i]=='agenda':
+                                 for ask in self.ask_schedule_info:
+                                     for data in self.send_schedule_data():
+                                         Text_To_Speech().translate_and_play(ask)
+
+
         except Exception as e:
              print("Invalid command\n")
-             print(e)
+             print(e)    
 
-    def set_schedule(self):
-        pass
+    def set_task(self):
+        Reminder().get_schedule_info()
 
     def open_web(self, web_name):
 

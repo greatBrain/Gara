@@ -4,7 +4,8 @@ import schedule
 import time
 import date_time_handler as dth
 from data import db_handler as dbh
-
+from text_to_speech import Text_To_Speech 
+from speech import Speech
 
 class Reminder:
       def __init__(self):
@@ -14,15 +15,32 @@ class Reminder:
 
           self.task = ''
 
-      def set_new_task(self, date, hour, task):
+      #With this generator, The assistant will ask to create the schedule
+      def get_schedule_info(self):
+          questions = [
+                    "Please, tell me the day?", 
+                    "now, the exactly hour", 
+                    "what would you like to remember?"
+          ]
+          
+          schedule_data = []
+          
+          while True:
+                for i, ask in enumerate(questions):
+                    Text_To_Speech().translate_and_play(questions[i])
+                    schedule_data.append(str(Speech().get_speech()))
+                break
+          self.set_new_task(schedule_data)
+
+      def set_new_task(self, data):
           try:
-              self.cursor.execute(''' INSERT INTO reminder(date, hour, task) VALUES(?,?,?) ''', (date, hour, task))
+              self.cursor.execute(''' INSERT INTO reminder(date, hour, task) VALUES(?,?,?) ''', (data[0], data[1], data[2]))
               self.conn.commit()
-              print("Agregado!")
+              Text_To_Speech().translate_and_play("Added susscesfully!")
 
           except Exception as e:
-              print("Something is wrong, try again!\n")
-              print(e)
+              Text_To_Speech().translate_and_play("Somthing is not right, please try again")
+              #print(e)
 
 
       def remind_task(self):
@@ -57,6 +75,9 @@ class Reminder:
       def delete_task(self, rowid):
           self.cursor.execute("DELETE FROM reminder WHERE rowid=?", (rowid))
 
+
+if __name__=="__main__":
+   Reminder().get_schedule_info() 
 
 #r = Reminder()
 #dth = dth.Date_And_Time()

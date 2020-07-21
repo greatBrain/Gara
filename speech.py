@@ -1,4 +1,5 @@
 import speech_recognition as sr
+from text_to_speech import Text_To_Speech
 
 class Speech:
     def __init__(self):
@@ -13,7 +14,7 @@ class Speech:
              print("Speak to me:\n")
 
              # adjust the energy threshold
-             self.rec.adjust_for_ambient_noise(source, duration=3)
+             self.rec.adjust_for_ambient_noise(source, duration=2)
              self.audio = self.rec.listen(source)
 
              try:
@@ -21,7 +22,7 @@ class Speech:
                  return self.voice
 
              except Exception as e:
-                 print("Sorry, could not understand you, try it again!\n")
+                 Text_To_Speech().translate_and_play("Sorry, could not understand you, try it again!\n")
 
              except sr.UnknownValueError:
                  print("Error don't known")
